@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Jasmine Spec Runner</title>
+        <script type="text/javascript" src="lib/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery.glob.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery.formula.js"></script>
+        <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.2.0/jasmine_favicon.png">
+        <link rel="stylesheet" type="text/css" href="lib/jasmine-1.2.0/jasmine.css">
+        <link href="../assets/css/bootstrap.css" rel="stylesheet">
+        <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="../assets/css/docs.css" rel="stylesheet">
+        <link href="../assets/css/prettify.css" rel="stylesheet">
+        <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine.js"></script>
+        <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine-html.js"></script>
+
+        <!-- include spec files here... -->
+        <script type="text/javascript" src="spec/resolve-operator.js"></script>
+        <script type="text/javascript" src="spec/api-value.js"></script>
+        <script type="text/javascript" src="spec/api-sum.js"></script>
+        <script type="text/javascript" src="spec/api-min.js"></script>
+        <script type="text/javascript" src="spec/api-max.js"></script>
+        <script type="text/javascript" src="spec/api-count.js"></script>
+        <script type="text/javascript" src="spec/api-avg.js"></script>
+        
+        <script type="text/javascript">
+            (function() {
+                var jasmineEnv = jasmine.getEnv();
+                jasmineEnv.updateInterval = 1000;
+
+                var htmlReporter = new jasmine.HtmlReporter();
+
+                jasmineEnv.addReporter(htmlReporter);
+
+                jasmineEnv.specFilter = function(spec) {
+                    return htmlReporter.specFilter(spec);
+                };
+
+                var currentWindowOnload = window.onload;
+
+                window.onload = function() {
+                    if (currentWindowOnload) {
+                        currentWindowOnload();
+                    }
+                    execJasmine();
+                };
+
+                function execJasmine() {
+                    jasmineEnv.execute();
+                }
+
+            })();
+        </script>
+
+    </head>
+
+    <body>
+        <input id="mytxt" class="mytext txtval" type="text" value="8.3" style="display:none">
+        <input id="empty" class="mytext" type="text" value="" style="display:none">
+        <input class="mytext txtval" type="text" value="2" style="display:none">
+        <input class="txtval" type="text" value="5" style="display:none">
+        <!--================================================== -->    
+    </body>
+</html>
