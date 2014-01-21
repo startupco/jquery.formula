@@ -36,7 +36,7 @@ formula="$('#qty').value()*$('[name="pine"]').value()+$('.tax').value()-$('#disc
 formula="row.find('[name*="quantity"]').value()*row.find('[name*="price_per_unit"]').value()"
 ```
 
-  - Column wise computation
+  - Column wise computation:
 
    For column wise computation this plugin uses aggregate functions like- sum, max, min, avg, count
 
