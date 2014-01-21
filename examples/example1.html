@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>jquery.formula</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="../assets/css/bootstrap.css" rel="stylesheet">
+        <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="../assets/css/docs.css" rel="stylesheet">
+        <link href="../assets/css/prettify.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="span12">
+            <form>
+                <fieldset>
+                    <legend>Example 1</legend>
+                    <label>Quantity</label>
+                    <input id="qty" type="text" placeholder="Type some numeric value…">
+                    <label>Price/Unit</label>
+                    <input id="pu" type="text" placeholder="Type some numeric value…">
+                    <label>Tax</label>
+                    <input id="tax" type="text" placeholder="Type some numeric value…">
+                    <label>Discount</label>
+                    <input id="disc" type="text" placeholder="Type some numeric value…">
+                    <label>Total</label>
+                    <input type="text" placeholder="Auto-populated as formula" formula="$('#qty').value()*$('#pu').value()+$('#tax').value()-$('#disc').value()">
+                </fieldset>
+            </form>
+        </div>
+        <script type="text/javascript" src="../tests/lib/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery.glob.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery.formula.js"></script>
+        <script type='text/javascript'>
+            $('form').find('[formula]').compute();
+        </script>
+    </body>
+</html>
