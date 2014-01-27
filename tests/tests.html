@@ -23,7 +23,7 @@
         <script type="text/javascript" src="spec/api-max.js"></script>
         <script type="text/javascript" src="spec/api-count.js"></script>
         <script type="text/javascript" src="spec/api-avg.js"></script>
-        
+        <script type="text/javascript" src="spec/evaluate_formula.js"></script>
         <script type="text/javascript">
             (function() {
                 var jasmineEnv = jasmine.getEnv();
@@ -60,6 +60,64 @@
         <input id="empty" class="mytext" type="text" value="" style="display:none">
         <input class="mytext txtval" type="text" value="2" style="display:none">
         <input class="txtval" type="text" value="5" style="display:none">
+
+
+        <form id="form1" style="display:none">
+            <fieldset>
+                <label>Quantity</label>
+                <input id="qty" value="50" type="text" placeholder="Type some numeric value…">
+                <label>Price/Unit</label>
+                <input id="pu" type="text" value="100" placeholder="Type some numeric value…">
+                <label>Discount %</label>
+                <input id="disc" type="text" value="5" placeholder="Type some numeric value…">
+                <label>Tax %</label>
+                <input id="tax" type="text" value="3" placeholder="Type some numeric value…">
+                <label>Total</label>
+                <input id="total" type="text" placeholder="Auto-populated as formula" formula="$('#qty').value()*$('#pu').value()-($('#qty').value()*$('#pu').value()*$('#disc').value()/100)+(($('#qty').value()*$('#pu').value()-($('#qty').value()*$('#pu').value()*$('#disc').value()/100))*$('#tax').value()/100)">
+            </fieldset>
+        </form>
+        <form id="form2" style="display:none">
+            <fieldset>
+                <label>Quantity</label>
+                <input id="form2-qty" value="50" type="text" placeholder="Type some numeric value…">
+                <label>Price/Unit</label>
+                <input id="form2-pu" type="text" value="100" placeholder="Type some numeric value…">
+                <label>Discount %</label>
+                <input id="form2-disc" type="text" value="5" placeholder="Type some numeric value…">
+                <label>Tax %</label>
+                <input id="form2-tax" type="text" value="3" placeholder="Type some numeric value…">
+                <label>Total</label>
+                <input id="form2-total" type="text" placeholder="Auto-populated as formula" formula="((100+250)*4-(50-20))/6">
+            </fieldset>
+        </form>
+        <form id="form3" style="display:none">
+            <fieldset>
+                <label>Quantity</label>
+                <input id="form3-qty" value="50" type="text" placeholder="Type some numeric value…">
+                <label>Price/Unit</label>
+                <input id="form3-pu" type="text" value="100" placeholder="Type some numeric value…">
+                <label>Discount %</label>
+                <input id="form3-disc" type="text" value="5" placeholder="Type some numeric value…">
+                <label>Tax %</label>
+                <input id="form3-tax" type="text" value="3" placeholder="Type some numeric value…">
+                <label>Total</label>
+                <input id="form3-total" type="text" placeholder="Auto-populated as formula" formula="$('#form3-qty').value()*$('#form3-pu').value()-($('#form3-qty').value()*$('#form3-pu').value()*$('#form3-disc').value()/100)+(($('#form3-qty').value()*$('#form3-pu').value()-($('#form3-qty').value()*$('#form3-pu').value()*$('#form3-disc').value()/100))*$('#form3-tax').value()/100)-70">
+            </fieldset>
+        </form>
+        <form id="form4" style="display:none">
+            <fieldset>
+                <label>Quantity</label>
+                <input id="form4-qty" value="50" type="text" placeholder="Type some numeric value…">
+                <label>Price/Unit</label>
+                <input id="form4-pu" type="text" value="100" placeholder="Type some numeric value…">
+                <label>Discount %</label>
+                <input id="form4-disc" type="text" value="5" placeholder="Type some numeric value…">
+                <label>Tax %</label>
+                <input id="form4-tax" type="text" value="3" placeholder="Type some numeric value…">
+                <label>Total</label>
+                <input id="form4-total" type="text" placeholder="Auto-populated as formula" formula="70+$('#form4-qty').value()*$('#form4-pu').value()-($('#form4-qty').value()*$('#form4-pu').value()*$('#form4-disc').value()/100)+(($('#form4-qty').value()*$('#form4-pu').value()-($('#form4-qty').value()*$('#form4-pu').value()*$('#form4-disc').value()/100))*$('#form4-tax').value()/100)">
+            </fieldset>
+        </form>
         <!--================================================== -->    
     </body>
 </html>
