@@ -76,4 +76,4 @@ It loops over all the matched elements and returns the maximum value number.
 It returns the average of all matched element values.
 
 #### Limitations:
-Version 1 has support for +, - , * and aggregate functions only. As of now there is no support for expression having brackets, %, /and  numbers.
+Version 1 has support for +, - , * and aggregate functions only. As of now there is no support for expression having brackets, %, / and  numbers.

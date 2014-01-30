@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>jquery.formula</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="../assets/css/bootstrap.css" rel="stylesheet">
+        <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="../assets/css/docs.css" rel="stylesheet">
+        <link href="../assets/css/prettify.css" rel="stylesheet">
+    </head>
+    <body>
+        <button id="add-row" class="btn btn-info">Add Row</button>
+        <form>
+            <table class="table">
+                <tbody>
+                    <tr class="header">
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>UOM</th>
+                        <th>Price/Unit</th>
+                        <th>Discount(%)</th>
+                        <th>Tax(%)</th>
+                        <th>Total Amount</th>
+                    </tr>
+                    <tr class="grid-template-row" style="display:none"><td><input name="product__X__" type="text" class="input-mini"></td><td><input name="description__X__" type="text" class="input-mini"></td><td><input name="quantity__X__" type="text" class="input-mini"></td><td><input name="uom__X__" type="text" class="input-mini"></td><td><input name="price_per_unit__X__" type="text" class="input-mini"></td><td><input name="discount__X__" type="text" class="input-mini"></td><td><input name="tax__X__" type="text" class="input-mini"></td><td><input formula="row.find(&apos;[name*=&quot;quantity&quot;]&apos;).value() *row.find(&apos;[name*=&quot;price_per_unit&quot;]&apos;).value()-(row.find(&apos;[name*=&quot;quantity&quot;]&apos;).value() *row.find(&apos;[name*=&quot;price_per_unit&quot;]&apos;).value()*row.find(&apos;[name*=&quot;discount&quot;]&apos;).value()/100)" name="total_amount__X__" type="text" class="input-mini"></td></tr>
+
+                </tbody>
+            </table>
+            <label>Grand Total</label>
+            <input id="sub_total" formula="$('[name*=&quot;total_amount&quot;]').sum()" type="text">
+        </form>
+        <script type="text/javascript" src="../tests/lib/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery.glob.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery.formula.js"></script>
+        <script type='text/javascript'>
+            $.rowcount = 0;
+            $('#add-row').on('click', function() {
+                $.rowcount++;
+                var temp_row = $('.grid-template-row').clone(true);
+                temp_row.removeClass('grid-template-row').addClass('last-data-row').removeAttr('style').find(':input').each(function() {
+                    var name = $(this).attr('name');
+                    var id = $(this).attr('id');
+                    if (name != null && name != '') {
+                        $(this).attr('name', name.replace('__X__', '__' + $.rowcount + '__'));
+                    }
+                })
+                temp_row.appendTo($("tbody"));
+            });
+            $('form').find('[formula]').compute();
+        </script>
+    </body>
+</html>
