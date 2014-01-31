@@ -1,4 +1,4 @@
-jquery.formula version 1
+jquery.formula version 2
 ========================
 
 This plugin provides mathematical computations for complex expressions
@@ -74,6 +74,3 @@ It loops over all the matched elements and returns the maximum value number.
 
 ###### avg:
 It returns the average of all matched element values.
-
-#### Limitations:
-Version 1 has support for +, - , * and aggregate functions only. As of now there is no support for expression having brackets, %, /and  numbers.

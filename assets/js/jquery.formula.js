@@ -1,69 +1,31 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  * This plugin provides formula computaion. And gives aggregate functions (sum, avg, max, min, count) to compute summary.
  * Use Case-
  * <input name="data[invoices][subtotal]" 
  formula="$('[name *= "sub_total"]').sum() + $('[name *= "tax_total"] ').value() - $('[name *=discount]').val()" >
  */
-
-// Returns an array as formula splitted through (+,-,*,/)
-$.uu = function() {
-    var c = "89ab";
-    var u = [];
-    for (var i = 0; i < 36; i++) {
-        u[i] = (Math.random() * 16 | 0).toString(16);
-    }
-    u[8] = u[13] = u[18] = u[23] = "-";
-    u[14] = "4";
-    u[19] = c.charAt((Math.random() * 4 | 0));
-    return u.join("");
-};
-function resolveOperators(formula) {
-    var splitted_formula = [];
-    formula = formula.replace(/ /g, '');
-    var splitted_operator = formula.split(/[\+\-\*]?\$/g);
-    for (var i = 0; i < splitted_operator.length; i++) {
-        if (splitted_operator[i] != "") {
-            splitted_formula.push('$' + splitted_operator[i]);
-        }
-    }
-    return splitted_formula;
-}
-
-// Finds all the fields containing attribute 'formula' in form, finds the dependencies mentioned in formula and on change of any dependency it recomputes the formula
+$(document).bind('document_update', function(event, dom) {
+    dom.find('form').ready(function() {
+        dom.find('[formula]').compute();
+    });
+});
+// Iterates over all the fields having attribute 'formula' and attaches a custome event 'computeformula' to them and triggers it if the target's closest form changes
 $.fn.compute = function(options) {
     var defaults = {};
     var settings = $.extend({}, defaults, options);
     $(this).each(function() {
         var isFormulaInitialize = $(this).attr('is_formula_initialize');
-        if (typeof (isFormulaInitialize) == 'undefined' || isFormulaInitialize != 1) {
+        if ((typeof (isFormulaInitialize) == 'undefined' || isFormulaInitialize != 1) && (typeof ($(this).attr('formula')) != "undefined")) {
             var formula = $(this).attr('formula');
             $(this).attr('formula', formula.replace(/row/gi, '$(this).closest(".last-data-row")'));
-            formula = formula.replace(/row/gi, '$(this).closest(".grid-template-row")');
             // Binding a custome event 'computeformula' to formula fields that will be fired when any of the formula dependency changes
             $(this).attr('is_formula_initialize', 1).bind("computeformula", function() {
                 var val = 0;
                 eval("val=" + $(this).attr('formula') + ";");
                 $(this).val(val);
-                $(this).trigger("change");
             });
-            // Generating a key to be used as class to determine individual elements
-            var key = $.uu();
-            $(this).addClass(key);
-            var className = 'trigger-formula-' + key;
-            // Calculating dependencies for formula fields and attaching 'change' event to them
-            var formulaDependencies = resolveOperators(formula);
-            for (i = 0; i < formulaDependencies.length; i++) {
-                var a = formulaDependencies[i].split('.');
-                a.pop();
-                a.push("addClass('" + className + "')");
-                a = a.join('.');
-                eval(a);
-            }
-            $(document).on('change', "." + className, function() {
-                $('.' + key).trigger('computeformula');
+            $(this).closest('form').on('change', function() {
+                $('[formula]').trigger('computeformula');
             });
         }
     });
